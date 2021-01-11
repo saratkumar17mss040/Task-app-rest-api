@@ -1,0 +1,15 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "rules": {
+        "no-var": "error",
+        "semi": "error",
+        "indent": "warn",
+        "no-multi-spaces": "error",
+        "space-in-parens": "error",
+        "no-multiple-empty-lines": "warn",
+        "prefer-const": "warn",
+        "no-use-before-define": "error"
+    }
+}

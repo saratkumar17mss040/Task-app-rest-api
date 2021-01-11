@@ -1,0 +1,36 @@
+{
+  "name": "task-app-rest-api",
+  "version": "1.0.0",
+  "description": "A simple task application rest api where the users can create, update, delete tasks.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "eslint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saratkumar17mss040/Task-app-rest-api.git"
+  },
+  "keywords": [
+    "rest-api",
+    "api",
+    "task-app-rest-api",
+    "task-app",
+    "crud"
+  ],
+  "author": "sarath",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saratkumar17mss040/Task-app-rest-api/issues"
+  },
+  "homepage": "https://github.com/saratkumar17mss040/Task-app-rest-api#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.17.0",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^20.0.3"
+  }
+}
