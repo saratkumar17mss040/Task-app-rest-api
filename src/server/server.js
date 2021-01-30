@@ -5,10 +5,11 @@ const Handler = require('./handlers/handler');
 const Users = require('./database');
 require('dotenv').config();
 
-console.log(`userId of first person in the db: ${Users[0].userId}`);
-console.log(
-    `userTask of first person in the db: ${JSON.stringify(Users[0].tasks)}`,
-);
+// console.log(process.env.AWS_REGION);
+// console.log(`userId of first person in the db: ${Users[0].userId}`);
+// console.log(
+//     `userTask of first person in the db: ${JSON.stringify(Users[0].tasks)}`,
+// );
 
 const validate = async function (decoded, request, h) {
     return { isValid: true };

@@ -1,0 +1,37 @@
+[
+    {
+        "userId": "cf6b6ee0-5f81-4166-b51b-d1994aaf3307",
+        "emailId": "sam123@gmail.com",
+        "password": "123",
+        "tasks": [
+            {
+                "createdAt": "1611647909846",
+                "todoId": "71a7a490-c132-42c8-ac45-91884a5e9508",
+                "todo": "Buy eggs"
+            },
+            {
+                "createdAt": "1611647909847",
+                "todoId": "bb6c8ed7-cad0-41ea-909a-ff3ebdbb7e05",
+                "todo": "Buy milk"
+            }
+        ]
+    },
+
+    {
+        "userId": "8ce1d9be-357b-4403-a6cc-312382db5d22",
+        "emailId": "ram123@gmail.com",
+        "password": "456",
+        "tasks": [
+            {
+                "createdAt": "1611647909848",
+                "todoId": "1ec6e4f2-b155-48d7-8c4b-8f8bac54af88",
+                "todo": "Buy fruits"
+            },
+            {
+                "createdAt": "1611647909849",
+                "todoId": "8844ab5b-4818-4f05-9427-8428dff56a65",
+                "todo": "Buy vegetables"
+            }
+        ]
+    }
+]
