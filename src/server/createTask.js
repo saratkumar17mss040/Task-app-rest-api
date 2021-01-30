@@ -1,58 +1,44 @@
-const AWS = require('aws-sdk');
 const Uuid = require('uuid');
+const Aws = require('aws-sdk');
 
-AWS.config.update({
+Aws.config.update({
     region: 'us-west-2',
     endpoint: 'http://localhost:8000',
 });
 
-const docClient = new AWS.DynamoDB.DocumentClient();
+const docClient = new Aws.DynamoDB.DocumentClient();
 
-const table = 'UsersTodo';
-
-const userId = 'c09022e0-14db-473d-89b8-9bae07a9620d';
-const emailId = 'chris123@gmail.com';
-// 789
-const password = '789';
-const todo = 'Buy phone';
-
-const fullTodo = {
-    createdAt: `${Date.now()}`,
-    todoId: Uuid.v4(),
-    todo: todo,
-};
+const table = 'Tasks';
+const userId = 'cf6b6ee0-5f81-4166-b51b-d1994aaf3307';
+const todo = 'Buy pizza';
+const todoStatus = 'not completed';
 
 const params = {
     TableName: table,
-    Key: {
-        userId: userId,
-        emailId: emailId,
-    },
+    // Key: {
+    //     userId: userId,
+    // },
     Item: {
+        createdAt: Date.now(),
         userId: userId,
-        emailId: emailId,
-    },
-    ConditionExpression: 'userId = :uId AND password = :pwd',
-    UpdateExpression:
-        'set  #todo = list_append(if_not_exists(#todo, :empty_list), :todo)',
-    ExpressionAttributeNames: {
-        '#todo': 'tasks',
-    },
-    ExpressionAttributeValues: {
-        ':uId': userId,
-        ':pwd': password,
-        ':todo': [fullTodo],
-        ':empty_list': [],
+        todoId: Uuid.v4(),
+        todo: todo,
+        todoStatus: todoStatus,
     },
 };
 
-docClient.update(params, function (err, data) {
+console.log('Inserting task for the given user...');
+
+docClient.put(params, function (err, data) {
     if (err) {
         console.error(
-            'Unable to add todo. Error JSON:',
+            'Unable to insert the task for the given user. Error JSON:',
             JSON.stringify(err, null, 2),
         );
     } else {
-        console.log('Added todo successfully:', JSON.stringify(data, null, 2));
+        console.log(
+            'Task inserted successfully :',
+            JSON.stringify(data, null, 2),
+        );
     }
 });

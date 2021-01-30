@@ -1,0 +1,44 @@
+[
+    {
+        "createdAt": 1611647909846,
+        "userId": "cf6b6ee0-5f81-4166-b51b-d1994aaf3307",
+        "todoId": "71a7a490-c132-42c8-ac45-91884a5e9508",
+        "todo": "Buy eggs",
+        "todoStatus": "completed"
+    },
+    {
+        "createdAt": 1611647909847,
+        "userId": "cf6b6ee0-5f81-4166-b51b-d1994aaf3307",
+        "todoId": "bb6c8ed7-cad0-41ea-909a-ff3ebdbb7e05",
+        "todo": "Buy milk",
+        "todoStatus": "not completed"
+    },
+    {
+        "createdAt": 1611647909848,
+        "userId": "cf6b6ee0-5f81-4166-b51b-d1994aaf3307",
+        "todoId": "1ec6e4f2-b155-48d7-8c4b-8f8bac54af88",
+        "todo": "Buy fruits",
+        "todoStatus": "not completed"
+    },
+    {
+        "createdAt": 1611647909849,
+        "userId": "cf6b6ee0-5f81-4166-b51b-d1994aaf3307",
+        "todoId": "8844ab5b-4818-4f05-9427-8428dff56a65",
+        "todo": "Buy vegetables",
+        "todoStatus": "completed"
+    },
+    {
+        "userId": "8ce1d9be-357b-4403-a6cc-312382db5d22",
+        "createdAt": 1611647909845,
+        "todoId": "71a7a490-c132-42c8-ac45-91884a5e9508",
+        "todo": "Buy guns",
+        "todoStatus": "completed"
+    },
+    {
+        "userId": "8ce1d9be-357b-4403-a6cc-312382db5d22",
+        "createdAt": "1611647909845",
+        "todoId": "bb6c8ed7-cad0-41ea-909a-ff3ebdbb7e05",
+        "todo": "Buy taco",
+        "todoStatus": "completed"
+    }
+]

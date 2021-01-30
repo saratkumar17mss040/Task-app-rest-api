@@ -7,22 +7,23 @@ Aws.config.update({
 
 const docClient = new Aws.DynamoDB.DocumentClient();
 
-const table = 'UsersTodo';
-const userId = '71a7a490-c132-42c8-ac45-91884a5e9508';
-const emailId = 'sam123@gmail.com';
+const table = 'Tasks';
+const userId = 'cf6b6ee0-5f81-4166-b51b-d1994aaf3307';
 
 const params = {
     TableName: table,
-    Key: {
-        userId: userId,
-        emailId: emailId,
+    KeyConditionExpression: '#userId = :id',
+    ExpressionAttributeNames: {
+        '#userId': 'userId',
     },
-    Return_values: 'ALL_NEW',
+    ExpressionAttributeValues: {
+        ':id': userId,
+    },
 };
 
 console.log('Reading tasks for the given user...');
 
-docClient.get(params, function (err, data) {
+docClient.query(params, function (err, data) {
     if (err) {
         console.error(
             'Unable to read the tasks for the given user. Error JSON:',
@@ -31,10 +32,7 @@ docClient.get(params, function (err, data) {
     } else {
         console.log(
             'Tasks readed successfully :',
-            JSON.stringify(data, null, 2),
+            JSON.stringify(data.Items, null, 2),
         );
     }
 });
-
-// first read
-// read -> update -> 

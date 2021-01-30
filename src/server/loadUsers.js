@@ -8,18 +8,17 @@ Aws.config.update({
 
 const docClient = new Aws.DynamoDB.DocumentClient();
 
-console.log('Importing UsersTodo data into DynamoDB. Please wait.');
+console.log('Importing Users data into DynamoDB. Please wait.');
 
-const users = JSON.parse(Fs.readFileSync('UsersTodo.json'));
+const users = JSON.parse(Fs.readFileSync('Users.json'));
 
 users.forEach(function (user) {
     const params = {
-        TableName: 'UsersTodo',
+        TableName: 'Users',
         Item: {
             userId: user.userId,
             emailId: user.emailId,
             password: user.password,
-            tasks: user.tasks,
         },
     };
 
@@ -33,7 +32,6 @@ users.forEach(function (user) {
             );
         } else {
             console.log('PutItem succeeded:', user);
-            console.log('Data', data);
         }
     });
 });

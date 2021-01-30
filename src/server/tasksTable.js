@@ -1,4 +1,3 @@
-const Uuid = require('uuid');
 const Aws = require('aws-sdk');
 
 Aws.config.update({
@@ -8,11 +7,11 @@ Aws.config.update({
 
 const dynamodb = new Aws.DynamoDB();
 
-const UsersTodoTableSchema = {
-    TableName: 'UsersTodo',
+const UsersTableSchema = {
+    TableName: 'Tasks',
     KeySchema: [
         { AttributeName: 'userId', KeyType: 'HASH' },
-        { AttributeName: 'emailId', KeyType: 'RANGE' },
+        { AttributeName: 'todoId', KeyType: 'RANGE' },
     ],
     AttributeDefinitions: [
         {
@@ -20,7 +19,7 @@ const UsersTodoTableSchema = {
             AttributeType: 'S',
         },
         {
-            AttributeName: 'emailId',
+            AttributeName: 'todoId',
             AttributeType: 'S',
         },
     ],
@@ -30,15 +29,15 @@ const UsersTodoTableSchema = {
     },
 };
 
-dynamodb.createTable(UsersTodoTableSchema, function (err, data) {
+dynamodb.createTable(UsersTableSchema, function (err, data) {
     if (err) {
         console.error(
-            'Unable to create table. Error JSON:',
+            'Unable to create tasks table. Error JSON:',
             JSON.stringify(err, null, 2),
         );
     } else {
         console.log(
-            'Created table. Table description JSON:',
+            'Created tasks table. Table description JSON:',
             JSON.stringify(data, null, 2),
         );
     }
