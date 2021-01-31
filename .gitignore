@@ -104,16 +104,29 @@ dist
 .tern-port
 
 # Amazon DynamoDB table creation, populating default data files and crud separate utilities
+
+# Tables
 src/server/usersTable.js
 src/server/tasksTable.js
+
+# Crud
 src/server/createTask.js
 src/server/readTasks.js
 src/server/updateTask.js
 src/server/deleteTask.js
+
+# Populating dummy data
 src/server/loadTasks.js
 src/server/loadUsers.js
+
+# Dummy data
 src/server/Tasks.json
 src/server/Users.json
+
+# Signup and Login
+src/server/signupUser.js
+src/server/loginUser.js
+
 
 
 
