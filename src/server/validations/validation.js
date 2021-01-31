@@ -15,22 +15,25 @@ const loginSchema = Joi.object({
 });
 
 const getTasksSchema = Joi.object({
-    userId: Joi.string().required(),
+    userId: Joi.string().required().min(36).max(36),
 });
 
 const createTaskSchema = Joi.object({
-    userId: Joi.string().required(),
+    userId: Joi.string().required().min(36).max(36),
     todo: Joi.string().required(),
+    todoStatus: Joi.string().required(),
 });
 
 const updateTaskSchema = Joi.object({
-    userId: Joi.string().required(),
-    updateTodoId: Joi.string().required(),
-    updateTodo: Joi.string(),
+    userId: Joi.string().required().min(36).max(36),
+    updateTodoId: Joi.string().required().min(36).max(36),
+    updateTodo: Joi.string().required(),
+    updateTodoStatus: Joi.string().required(),
 });
 
 const deleteTaskSchema = Joi.object({
-    deleteTodoId: Joi.string().required(),
+    userId: Joi.string().required().min(36).max(36),
+    deleteTodoId: Joi.string().required().min(36).max(36),
 });
 
 module.exports = {

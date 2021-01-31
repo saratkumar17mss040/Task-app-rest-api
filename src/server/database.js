@@ -37,12 +37,12 @@ const Users = [
     },
 ];
 
-console.log(Users);
+// console.log(Users);
 
-for (let i = 0; i < Users.length; i++) {
-    Users[i].tasks.forEach(element => {
-        console.log(element);
-    });
-}
+// for (let i = 0; i < Users.length; i++) {
+//     Users[i].tasks.forEach(element => {
+//         // console.log(element);
+//     });
+// }
 
 // module.exports = Users;

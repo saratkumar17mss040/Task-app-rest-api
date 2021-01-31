@@ -2,7 +2,6 @@
 const Hapi = require('@hapi/hapi');
 const HapiAuthJWT = require('hapi-auth-jwt2');
 const Handler = require('./handlers/handler');
-const Users = require('./database');
 require('dotenv').config();
 
 // console.log(process.env.AWS_REGION);
