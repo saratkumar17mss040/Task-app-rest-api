@@ -103,13 +103,17 @@ dist
 # TernJS port file
 .tern-port
 
-# Amazon DynamoDB table creation and populating default data files
-# src/server/usersTodoTableCreation.js
-# src/server/usersLoadTodo.js
-# src/server/usersTodo.json
-# src/server/createUser.js
-# src/server/createTask.js
-# src/server/readTasks.js
-# src/server/updateTask.js
-# src/server/deleteTask.js
+# Amazon DynamoDB table creation, populating default data files and crud separate utilities
+src/server/usersTable.js
+src/server/tasksTable.js
+src/server/createTask.js
+src/server/readTasks.js
+src/server/updateTask.js
+src/server/deleteTask.js
+src/server/loadTasks.js
+src/server/loadUsers.js
+src/server/Tasks.json
+src/server/Users.json
+
+
 
