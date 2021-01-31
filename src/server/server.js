@@ -1,4 +1,5 @@
 'use strict';
+
 const Hapi = require('@hapi/hapi');
 const HapiAuthJWT = require('hapi-auth-jwt2');
 const Handler = require('./handlers/handler');

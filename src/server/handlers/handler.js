@@ -1,7 +1,8 @@
+'use strict';
+
 const Schema = require('../validations/validation');
 const Jwt = require('jsonwebtoken');
 const Uuid = require('uuid');
-// const Users = require('../database');
 const DBOperations = require('../dbOperations');
 const AWS = require('aws-sdk');
 
@@ -21,7 +22,9 @@ function defaultRouteHandler(request, reply) {
 
 async function signupRouteHandler(request, response) {
     const { emailId, password } = request.payload || {};
-    const { value, error } = Schema.signupSchema.validate(request.payload);
+    const { value, error } = await Schema.signupSchema.validate(
+        request.payload,
+    );
 
     // console.log(value, error);
 
