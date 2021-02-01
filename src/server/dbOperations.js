@@ -33,7 +33,7 @@ function query(params) {
                 console.error('Unable to query', JSON.stringify(err, null, 2));
                 return reject(err);
             } else {
-                console.log('Queried data successfully');
+                console.log('Data queried successfully');
                 return resolve(data);
             }
         });

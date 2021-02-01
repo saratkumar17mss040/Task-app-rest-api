@@ -60,7 +60,10 @@ async function signupRouteHandler(request, response) {
             };
 
             await DBOperations.put(signupParams);
-            return { message: 'Successful signup !' };
+            return {
+                message: 'Successful signup !',
+                userId: signupParams.Item.userId,
+            };
         }
     }
 }
@@ -132,7 +135,8 @@ async function getTodoRouteHandler(request, response) {
         // console.log('Reading tasks for the given user...');
 
         const getTasks = await DBOperations.query(readTasksParams);
-        if (getTasks.Items.length === 0) {
+        console.log(getTasks);
+        if (getTasks.Items.length === undefined) {
             return {
                 message:
                     "Entered userId does not exist in the database. Please enter registered userId to read todo's !",
@@ -165,7 +169,7 @@ async function createTodoRouteHandler(request, response) {
         };
 
         const getTasks = await DBOperations.query(readTasksParams);
-        if (getTasks.Items.length === 0) {
+        if (getTasks.Items.length === undefined) {
             return {
                 message:
                     'Entered userId does not exist in the database. Please enter registered userId to add todo !',
@@ -218,7 +222,7 @@ async function updateTodoRouteHandler(request, response) {
         };
 
         const getTasks = await DBOperations.query(readTasksParams);
-        if (getTasks.Items.length === 0) {
+        if (getTasks.Items.length === undefined) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to update the todo !',
@@ -271,7 +275,7 @@ async function deleteTodoRouteHandler(request, response) {
 
         const getTasks = await DBOperations.query(readTasksParams);
         console.log(getTasks);
-        if (getTasks.Items.length === 0) {
+        if (getTasks.Items.length === undefined) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to delete the todo !',

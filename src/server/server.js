@@ -1,18 +1,35 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
-const HapiAuthJWT = require('hapi-auth-jwt2');
+const HapiSwagger = require('hapi-swagger');
 const Handler = require('./handlers/handler');
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const Package = require('../../package');
+const hapiAuthJwt2 = require('hapi-auth-jwt2');
 require('dotenv').config();
-
-// console.log(process.env.AWS_REGION);
-// console.log(`userId of first person in the db: ${Users[0].userId}`);
-// console.log(
-//     `userTask of first person in the db: ${JSON.stringify(Users[0].tasks)}`,
-// );
 
 const validate = async function (decoded, request, h) {
     return { isValid: true };
+};
+
+const server = Hapi.server({
+    port: process.env.PORT || 4000,
+    host: 'localhost',
+    routes: {
+        cors: true,
+    },
+});
+
+const swaggerOptions = {
+    info: {
+        title: 'Task rest-api test documentation 😎',
+        name: Package.name,
+        version: Package.version,
+        description: Package.description,
+        author: Package.author,
+        homePage: Package.homepage,
+    },
 };
 
 const init = async () => {
@@ -21,12 +38,8 @@ const init = async () => {
         process.exit(1);
     });
 
-    const server = Hapi.server({
-        port: 3000,
-        host: 'localhost',
-    });
+    await server.register(hapiAuthJwt2);
 
-    await server.register(HapiAuthJWT);
     server.auth.strategy('jwt', 'jwt', {
         key: process.env.ACCESS_TOKEN_SECRET,
         validate,
@@ -34,6 +47,23 @@ const init = async () => {
     });
 
     server.auth.default('jwt');
+
+    await server.register([
+        Inert,
+        Vision,
+        {
+            plugin: HapiSwagger,
+            options: swaggerOptions,
+        },
+    ]);
+
+    // getTodo route
+    server.route({
+        method: 'GET',
+        path: '/id/{userId}',
+        config: { auth: 'jwt' },
+        handler: Handler.getTodoRouteHandler,
+    });
 
     // default route
     server.route({
@@ -57,14 +87,6 @@ const init = async () => {
         path: '/login',
         config: { auth: false },
         handler: Handler.loginRouteHandler,
-    });
-
-    // getTodo route
-    server.route({
-        method: 'GET',
-        path: '/id/{userId}',
-        config: { auth: 'jwt' },
-        handler: Handler.getTodoRouteHandler,
     });
 
     // createTodo route
@@ -92,13 +114,7 @@ const init = async () => {
     });
 
     await server.start();
-    return server;
+    console.log('Server ⚡ running at:', server.info.uri);
 };
 
-init()
-    .then((server) => {
-        console.log('Server running at:', server.info.uri);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+init();

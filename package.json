@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.0.3",
+    "@hapi/inert": "^6.0.3",
+    "@hapi/vision": "^6.0.1",
     "aws-sdk": "^2.831.0",
     "hapi-auth-jwt2": "^10.2.0",
     "hapi-swagger": "^14.1.0",
