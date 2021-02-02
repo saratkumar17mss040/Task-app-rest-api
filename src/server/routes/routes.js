@@ -70,8 +70,8 @@ const createTodoRoute = {
     path: '/todo',
     handler: Handler.createTodoRouteHandler,
     config: {
-        // auth: 'jwt',
-        auth: false,
+        auth: 'jwt',
+        // auth: false,
         description: 'Post - submit todo by userId, todo, todoStatus',
         notes: ["Returns all the todo's with the submitted todo"],
         tags: ['api'],
@@ -87,8 +87,8 @@ const updateTodoRoute = {
     path: '/todo',
     handler: Handler.updateTodoRouteHandler,
     config: {
-        // auth: 'jwt',
-        auth: false,
+        auth: 'jwt',
+        // auth: false,
         description:
             'Put - update todo by userId, updateTodoId, updateTodo, updateTodoStatus',
         notes: ["Returns all the todo's with the updated todo"],
@@ -105,8 +105,8 @@ const deleteTodoRoute = {
     path: '/todo',
     handler: Handler.deleteTodoRouteHandler,
     config: {
-        // auth: 'jwt',
-        auth: false,
+        auth: 'jwt',
+        // auth: false,
         description: 'Delete - remove todo by userId, deleteTodoId',
         notes: ['Returns whether the given todoId is deleted or not'],
         tags: ['api'],

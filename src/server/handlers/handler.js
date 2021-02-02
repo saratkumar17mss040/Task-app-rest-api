@@ -163,7 +163,7 @@ async function createTodoRouteHandler(request, response) {
             };
 
             await DBOperations.put(createTaskParams);
-            return { message: 'Task added successfully', todoId: Item.todoId };
+            return { message: 'Task added successfully', todoId: createTaskParams.Item.todoId };
         }
     }
 }

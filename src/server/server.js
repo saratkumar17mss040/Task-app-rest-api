@@ -28,6 +28,14 @@ const swaggerOptions = {
         version: Package.version,
         description: Package.description,
     },
+    securityDefinitions: {
+        jwt: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+        },
+    },
+    security: [{ jwt: [] }],
 };
 
 const init = async () => {
