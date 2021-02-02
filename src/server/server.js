@@ -2,11 +2,12 @@
 
 const Hapi = require('@hapi/hapi');
 const HapiSwagger = require('hapi-swagger');
-const Handler = require('./handlers/handler');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const Package = require('../../package');
 const hapiAuthJwt2 = require('hapi-auth-jwt2');
+const Routes = require('./routes/routes');
+
 require('dotenv').config();
 
 const validate = async function (decoded, request, h) {
@@ -24,11 +25,8 @@ const server = Hapi.server({
 const swaggerOptions = {
     info: {
         title: 'Task rest-api test documentation 😎',
-        name: Package.name,
         version: Package.version,
         description: Package.description,
-        author: Package.author,
-        homePage: Package.homepage,
     },
 };
 
@@ -57,61 +55,26 @@ const init = async () => {
         },
     ]);
 
-    // getTodo route
-    server.route({
-        method: 'GET',
-        path: '/id/{userId}',
-        config: { auth: 'jwt' },
-        handler: Handler.getTodoRouteHandler,
-    });
-
     // default route
-    server.route({
-        method: 'GET',
-        path: '/',
-        config: { auth: false },
-        handler: Handler.defaultRouteHandler,
-    });
+    server.route(Routes.defaultRoute);
+
+    // getTodo route
+    server.route(Routes.getTodoRoute);
 
     // signup route
-    server.route({
-        method: 'POST',
-        path: '/signup',
-        config: { auth: false },
-        handler: Handler.signupRouteHandler,
-    });
+    server.route(Routes.signupRoute);
 
     // login route
-    server.route({
-        method: 'POST',
-        path: '/login',
-        config: { auth: false },
-        handler: Handler.loginRouteHandler,
-    });
+    server.route(Routes.loginRoute);
 
     // createTodo route
-    server.route({
-        method: 'POST',
-        path: '/todo',
-        config: { auth: 'jwt' },
-        handler: Handler.createTodoRouteHandler,
-    });
+    server.route(Routes.createTodoRoute);
 
     // updateTodo route
-    server.route({
-        method: 'PUT',
-        path: '/todo',
-        config: { auth: 'jwt' },
-        handler: Handler.updateTodoRouteHandler,
-    });
+    server.route(Routes.updateTodoRoute);
 
     // deleteTodo route
-    server.route({
-        method: 'DELETE',
-        path: '/todo',
-        config: { auth: 'jwt' },
-        handler: Handler.deleteTodoRouteHandler,
-    });
+    server.route(Routes.deleteTodoRoute);
 
     await server.start();
     console.log('Server ⚡ running at:', server.info.uri);

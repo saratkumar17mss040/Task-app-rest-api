@@ -1,18 +1,17 @@
 'use strict';
 
-const Schema = require('../validations/validation');
 const Jwt = require('jsonwebtoken');
 const Uuid = require('uuid');
 const DBOperations = require('../dbOperations');
-const AWS = require('aws-sdk');
-
-AWS.config.update({
-    region: 'us-west-2',
-    endpoint: 'http://localhost:8000',
-});
-
-// const db = new AWS.DynamoDB.DocumentClient();
+const Schema = require('../validations/validation');
+// const AWS = require('aws-sdk');
 require('dotenv').config();
+require('../dbOperations');
+
+// AWS.config.update({
+//     region: process.env.AWS_REGION,
+//     endpoint: process.env.END_POINT,
+// });
 
 function defaultRouteHandler(request, reply) {
     return {
@@ -26,12 +25,9 @@ async function signupRouteHandler(request, response) {
         request.payload,
     );
 
-    // console.log(value, error);
-
     if (error) {
         return error.details;
     } else {
-        // Users.push({ id: Uuid.v4(), emailId, password });
         const checkIsUserExistParams = {
             TableName: 'Users',
             KeyConditionExpression: '#emailId = :id',
@@ -72,8 +68,6 @@ async function loginRouteHandler(request, response) {
     const { emailId, password } = request.payload || {};
     const { value, error } = await Schema.loginSchema.validate(request.payload);
 
-    // console.log(value, error);
-
     if (error) {
         return error.details;
     } else {
@@ -97,13 +91,11 @@ async function loginRouteHandler(request, response) {
                     'Entered emailId and password is not correct. Please enter registered emailId and password !',
             };
         } else {
-            // console.log('Logging in...');
             const jwtUserToken = Jwt.sign(
                 { emailId, password },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '1h' },
             );
-            // console.log(jwtUserToken);
             return { message: 'Successful login !,', token: jwtUserToken };
         }
     }
@@ -112,11 +104,6 @@ async function loginRouteHandler(request, response) {
 async function getTodoRouteHandler(request, response) {
     const userId = request.params.userId || undefined;
     const { value, error } = await Schema.getTasksSchema.validate({ userId });
-
-    // console.log('userId');
-    // console.log(userId);
-    // console.log('value, error');
-    // console.log(value, error);
 
     if (error) {
         return error.details;
@@ -131,8 +118,6 @@ async function getTodoRouteHandler(request, response) {
                 ':id': userId,
             },
         };
-
-        // console.log('Reading tasks for the given user...');
 
         const getTasks = await DBOperations.query(readTasksParams);
         console.log(getTasks);
@@ -151,8 +136,6 @@ async function createTodoRouteHandler(request, response) {
     const { value, error } = await Schema.createTaskSchema.validate(
         request.payload,
     );
-
-    // console.log(value, error);
 
     if (error) {
         return error.details;
@@ -186,10 +169,8 @@ async function createTodoRouteHandler(request, response) {
                 },
             };
 
-            // console.log('Inserting task for the given user...');
-
             await DBOperations.put(createTaskParams);
-            return { message: 'Task added successfully' };
+            return { message: 'Task added successfully', todoId: Item.todoId };
         }
     }
 }
@@ -197,9 +178,6 @@ async function createTodoRouteHandler(request, response) {
 async function updateTodoRouteHandler(request, response) {
     const { userId, updateTodoId, updateTodo, updateTodoStatus } =
         request.payload || {};
-
-    // console.log(request.payload);
-    // console.log(value, error);
 
     const { value, error } = await Schema.updateTaskSchema.validate(
         request.payload,
@@ -242,7 +220,6 @@ async function updateTodoRouteHandler(request, response) {
                 ReturnValues: 'UPDATED_NEW',
             };
 
-            // console.log('Updating task for the given user...');
             await DBOperations.update(updateTaskParams);
             return { message: 'Task updated successfully' };
         }
