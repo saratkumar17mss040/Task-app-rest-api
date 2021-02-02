@@ -10,6 +10,7 @@
         "space-in-parens": "error",
         "no-multiple-empty-lines": "warn",
         "prefer-const": "warn",
-        "no-use-before-define": "error"
+        "no-use-before-define": "error",
+        "no-console": "warn"
     }
 }

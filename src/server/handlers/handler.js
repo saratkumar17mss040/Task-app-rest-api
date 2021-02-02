@@ -4,14 +4,8 @@ const Jwt = require('jsonwebtoken');
 const Uuid = require('uuid');
 const DBOperations = require('../dbOperations');
 const Schema = require('../validations/validation');
-// const AWS = require('aws-sdk');
 require('dotenv').config();
 require('../dbOperations');
-
-// AWS.config.update({
-//     region: process.env.AWS_REGION,
-//     endpoint: process.env.END_POINT,
-// });
 
 function defaultRouteHandler(request, reply) {
     return {
@@ -120,7 +114,6 @@ async function getTodoRouteHandler(request, response) {
         };
 
         const getTasks = await DBOperations.query(readTasksParams);
-        console.log(getTasks);
         if (getTasks.Items.length === undefined) {
             return {
                 message:
@@ -232,8 +225,6 @@ async function deleteTodoRouteHandler(request, response) {
         request.payload,
     );
 
-    console.log(value, error);
-
     if (error) {
         return error.details;
     } else {
@@ -251,7 +242,6 @@ async function deleteTodoRouteHandler(request, response) {
         };
 
         const getTasks = await DBOperations.query(readTasksParams);
-        console.log(getTasks);
         if (getTasks.Items.length === undefined) {
             return {
                 message:
@@ -269,7 +259,6 @@ async function deleteTodoRouteHandler(request, response) {
                     ':taskId': deleteTodoId,
                 },
             };
-            console.log('Attempting a conditional delete...');
             await DBOperations.del(deleteTaskParams);
             return {
                 message: 'Task deleted successfully',
