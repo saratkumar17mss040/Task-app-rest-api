@@ -11,6 +11,6 @@
         "no-multiple-empty-lines": "warn",
         "prefer-const": "warn",
         "no-use-before-define": "error",
-        "no-console": "warn"
+        "no-console": "off"
     }
 }
