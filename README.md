@@ -24,8 +24,7 @@ Vision - Template rendering plugin support for hapij.
 
 Inert - Static file and directory handlers plugin for hapijs.
 
-## Some of the other tools used in this project to follow best practices, 
-## maintain code quality and to have good development experience
+## Some of the other tools used in this project to follow best practices, maintain code quality and to have good development experience
 
 Eslint - A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.
 
