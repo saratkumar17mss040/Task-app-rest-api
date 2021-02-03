@@ -1,16 +1,16 @@
 'use strict';
 
 const Handler = require('../handlers/handler');
-const Schema = require('../validations/validation');
+const Schema = require('../Schema/schema');
 
 // All server routes
 const defaultRoute = {
     method: 'GET',
-    path: '/defaultPath',
+    path: '/active',
     handler: Handler.defaultRouteHandler,
     config: {
         auth: false,
-        description: 'Get - default todo route',
+        description: 'Get - server active route',
         notes: ['Returns the default todo route response'],
         tags: ['api'],
         cors: true,
@@ -29,6 +29,9 @@ const getTodoRoute = {
         cors: true,
         validate: {
             params: Schema.getTasksSchema,
+        },
+        response: {
+            schema: Schema.getTasksResponseSchema,
         },
     },
 };
@@ -87,8 +90,7 @@ const updateTodoRoute = {
     handler: Handler.updateTodoRouteHandler,
     config: {
         auth: 'jwt',
-        description:
-            'Put - update todo by userId, updateTodoId, updateTodo, updateTodoStatus',
+        description: 'Put - update todo by userId, todoId, todo, todoStatus',
         notes: ["Returns all the todo's with the updated todo"],
         tags: ['api'],
         cors: true,
@@ -104,7 +106,7 @@ const deleteTodoRoute = {
     handler: Handler.deleteTodoRouteHandler,
     config: {
         auth: 'jwt',
-        description: 'Delete - remove todo by userId, deleteTodoId',
+        description: 'Delete - remove todo by userId, todoId',
         notes: ['Returns whether the given todoId is deleted or not'],
         tags: ['api'],
         cors: true,

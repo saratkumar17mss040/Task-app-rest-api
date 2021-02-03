@@ -2,7 +2,7 @@
 
 const Jwt = require('jsonwebtoken');
 const DBOperations = require('../dbOperations');
-const Schema = require('../validations/validation');
+const Schema = require('../Schema/schema');
 const DBparams = require('../params/dbParams');
 require('dotenv').config();
 require('../dbOperations');
@@ -75,18 +75,7 @@ async function getTodoRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        const readTasksParams = {
-            TableName: 'Tasks',
-            KeyConditionExpression: '#userId = :id',
-            ExpressionAttributeNames: {
-                '#userId': 'userId',
-            },
-            ExpressionAttributeValues: {
-                ':id': userId,
-            },
-        };
-
-        const getTasks = await DBOperations.query(readTasksParams);
+        const getTasks = await DBOperations.query(DBparams.readTasks(userId));
         if (getTasks.Items.length === 0) {
             return {
                 message:

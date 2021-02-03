@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 
-// All server data validation
+// All server requests schema data validation
 const signupSchema = Joi.object({
     emailId: Joi.string()
         .email()
@@ -14,7 +14,7 @@ const signupSchema = Joi.object({
         .required()
         .description('password for signup')
         .default('456'),
-});
+}).label('signupModel');
 
 const loginSchema = Joi.object({
     emailId: Joi.string()
@@ -27,7 +27,7 @@ const loginSchema = Joi.object({
         .required()
         .description('password of the registered user')
         .default('123'),
-});
+}).label('loginModel');
 
 const getTasksSchema = Joi.object({
     userId: Joi.string()
@@ -36,7 +36,7 @@ const getTasksSchema = Joi.object({
         .max(36)
         .description('userId of type uuid - v4')
         .default('cf6b6ee0-5f81-4166-b51b-d1994aaf3307'),
-});
+}).label('getTasksModel');
 
 const createTaskSchema = Joi.object({
     userId: Joi.string()
@@ -53,7 +53,7 @@ const createTaskSchema = Joi.object({
         .required()
         .description('todoStatus whether it is completed or not')
         .default('not completed'),
-});
+}).label('createTaskModel');
 
 const updateTaskSchema = Joi.object({
     userId: Joi.string()
@@ -78,7 +78,7 @@ const updateTaskSchema = Joi.object({
             'updateTodoStatus to update whether the todo is completed or not',
         )
         .default('completed'),
-});
+}).label('updateTaskModel');
 
 const deleteTaskSchema = Joi.object({
     userId: Joi.string()
@@ -93,7 +93,18 @@ const deleteTaskSchema = Joi.object({
         .max(36)
         .description('deleteTodoId to delete todo by id')
         .default('71a7a490-c132-42c8-ac45-91884a5e9508'),
-});
+}).label('deleteTaskModel');
+
+// All server response schema model
+const getTasksResponseSchema = Joi.array().items(
+    Joi.object({
+        todo: Joi.string(),
+        createdAt: Joi.number(),
+        todoId: Joi.string(),
+        userId: Joi.string(),
+        todoStatus: Joi.string(),
+    }).label('todo'),
+).label('list');
 
 module.exports = {
     signupSchema,
@@ -102,4 +113,5 @@ module.exports = {
     createTaskSchema,
     updateTaskSchema,
     deleteTaskSchema,
+    getTasksResponseSchema,
 };
