@@ -4,7 +4,7 @@ A simple 📑 task-rest 😎 API where the users can create, update, delete task
 
 ## 🌟Tech stacks used in building this API
 
-**Hapi**  - Secured web framework.
+**Hapi** - Secured web framework.
 
 **Joi** - Schema description and data validation.
 
@@ -66,3 +66,6 @@ Alternatively you can also use postman to test API calls.
 -   Users can update todo.
 -   Users can delete todo.
 
+## 📷 Screenshot
+
+![alt text](screenshot.png 'Swagger API documentation')
