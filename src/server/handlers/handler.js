@@ -7,6 +7,7 @@ const DBparams = require('../params/dbParams');
 require('dotenv').config();
 require('../dbOperations');
 
+// All server handler functions
 function defaultRouteHandler(request, reply) {
     return {
         message: 'Basic 📑 task-rest api using hapijs 😎 !',

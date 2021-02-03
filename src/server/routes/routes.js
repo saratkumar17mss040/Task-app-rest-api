@@ -3,6 +3,7 @@
 const Handler = require('../handlers/handler');
 const Schema = require('../validations/validation');
 
+// All server routes
 const defaultRoute = {
     method: 'GET',
     path: '/defaultPath',

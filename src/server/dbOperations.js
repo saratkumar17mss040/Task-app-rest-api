@@ -4,6 +4,7 @@ const AWS = require('./dbConfig');
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
+// Amazon DynamoDB - All operation fucnctions
 function put(params) {
     return new Promise((resolve, reject) => {
         dynamodb.put(params, (err, data) => {

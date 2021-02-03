@@ -1,8 +1,8 @@
 'use strcit';
 
-// const Schema = require('../validations/validation');
 const Uuid = require('uuid');
 
+// All database server params
 function checkIsUserExist(emailId) {
     const checkIsUserExistParams = {
         TableName: 'Users',

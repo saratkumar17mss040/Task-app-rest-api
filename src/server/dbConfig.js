@@ -1,5 +1,6 @@
 'use strict';
 
+// Amazon - DynamoDB config
 const AWS = require('aws-sdk');
 require('dotenv').config();
 

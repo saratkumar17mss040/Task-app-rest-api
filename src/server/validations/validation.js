@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 
+// All server data validation
 const signupSchema = Joi.object({
     emailId: Joi.string()
         .email()

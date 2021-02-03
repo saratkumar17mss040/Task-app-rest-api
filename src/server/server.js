@@ -13,6 +13,7 @@ const validate = async function (decoded, request, h) {
     return { isValid: true };
 };
 
+// Server config
 const server = Hapi.server({
     port: process.env.PORT || 4000,
     host: 'localhost',
@@ -21,6 +22,7 @@ const server = Hapi.server({
     },
 });
 
+// Swagger config
 const swaggerOptions = {
     info: {
         title: 'Task rest-api test documentation 😎',
@@ -43,6 +45,7 @@ const init = async () => {
         process.exit(1);
     });
 
+    // Registering necessary plugins / scheme
     await server.register(hapiAuthJwt2);
 
     server.auth.strategy('jwt', 'jwt', {
@@ -87,4 +90,5 @@ const init = async () => {
     console.log('Server ⚡ running at:', server.info.uri);
 };
 
+// initializing server
 init();
