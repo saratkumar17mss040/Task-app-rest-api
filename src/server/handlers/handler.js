@@ -1,7 +1,6 @@
 'use strict';
 
 const Jwt = require('jsonwebtoken');
-// const Uuid = require('uuid');
 const DBOperations = require('../dbOperations');
 const Schema = require('../validations/validation');
 const DBparams = require('../params/dbParams');
@@ -23,17 +22,6 @@ async function signupRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        // const checkIsUserExistParams = {
-        //     TableName: 'Users',
-        //     KeyConditionExpression: '#emailId = :id',
-        //     ExpressionAttributeNames: {
-        //         '#emailId': 'emailId',
-        //     },
-        //     ExpressionAttributeValues: {
-        //         ':id': emailId,
-        //     },
-        // };
-
         const user = await DBOperations.query(
             DBparams.checkIsUserExist(emailId),
         );
@@ -43,14 +31,6 @@ async function signupRouteHandler(request, response) {
                     'User already registered with this emailId. Try using another emailId !',
             };
         } else {
-            // const signupParams = {
-            //     TableName: 'Users',
-            //     Item: {
-            //         userId: Uuid.v4(),
-            //         emailId: emailId,
-            //         password: password,
-            //     },
-            // };
             const signup = DBparams.signup(emailId, password);
             await DBOperations.put(signup);
             return {
@@ -68,19 +48,6 @@ async function loginRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        // const checkLoginParams = {
-        //     TableName: 'Users',
-        //     KeyConditionExpression: '#emailId = :eId',
-        //     FilterExpression: '#password = :pwd',
-        //     ExpressionAttributeNames: {
-        //         '#emailId': 'emailId',
-        //         '#password': 'password',
-        //     },
-        //     ExpressionAttributeValues: {
-        //         ':eId': emailId,
-        //         ':pwd': password,
-        //     },
-        // };
         const user = await DBOperations.query(
             DBparams.checkLogin(emailId, password),
         );
@@ -119,9 +86,7 @@ async function getTodoRouteHandler(request, response) {
         };
 
         const getTasks = await DBOperations.query(readTasksParams);
-        if (
-            getTasks.Items.length === 0
-        ) {
+        if (getTasks.Items.length === 0) {
             return {
                 message:
                     "Entered userId does not exist in the database. Please enter registered userId to read todo's !",
@@ -140,38 +105,14 @@ async function createTodoRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        // const readTasksParams = {
-        //     TableName: 'Tasks',
-        //     KeyConditionExpression: '#userId = :id',
-        //     ExpressionAttributeNames: {
-        //         '#userId': 'userId',
-        //     },
-        //     ExpressionAttributeValues: {
-        //         ':id': userId,
-        //     },
-        // };
-
         const getTasks = await DBOperations.query(DBparams.readTasks(userId));
         console.log(getTasks.Items.length);
-        if (
-            getTasks.Items.length === 0 
-        ) {
+        if (getTasks.Items.length === 0) {
             return {
                 message:
                     'Entered userId does not exist in the database. Please enter registered userId to add todo !',
             };
         } else {
-            // const createTaskParams = {
-            //     TableName: 'Tasks',
-            //     Item: {
-            //         createdAt: Date.now(),
-            //         userId: userId,
-            //         todoId: Uuid.v4(),
-            //         todo: todo,
-            //         todoStatus: todoStatus,
-            //     },
-            // };
-
             const task = DBparams.createTask(userId, todo, todoStatus);
             await DBOperations.put(task);
             return {
@@ -193,44 +134,15 @@ async function updateTodoRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        // const readTasksParams = {
-        //     TableName: 'Tasks',
-        //     KeyConditionExpression: '#userId = :id AND #taskId = :todoId',
-        //     ExpressionAttributeNames: {
-        //         '#userId': 'userId',
-        //         '#taskId': 'todoId',
-        //     },
-        //     ExpressionAttributeValues: {
-        //         ':id': userId,
-        //         ':todoId': updateTodoId,
-        //     },
-        // };
-
         const getTasks = await DBOperations.query(
             DBparams.readTasksForUpdate(userId, updateTodoId),
         );
-        if (
-            getTasks.Items.length === 0
-        ) {
+        if (getTasks.Items.length === 0) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to update the todo !',
             };
         } else {
-            // const updateTaskParams = {
-            //     TableName: 'Tasks',
-            //     Key: {
-            //         userId: userId,
-            //         todoId: updateTodoId,
-            //     },
-            //     UpdateExpression: 'set todo = :task , todoStatus = :status',
-            //     ExpressionAttributeValues: {
-            //         ':task': updateTodo,
-            //         ':status': updateTodoStatus,
-            //     },
-            //     ReturnValues: 'UPDATED_NEW',
-            // };
-
             await DBOperations.update(
                 DBparams.updateTask(
                     userId,
@@ -253,41 +165,15 @@ async function deleteTodoRouteHandler(request, response) {
     if (error) {
         return error.details;
     } else {
-        // const readTasksParams = {
-        //     TableName: 'Tasks',
-        //     KeyConditionExpression: '#userId = :id AND #taskId = :todoId',
-        //     ExpressionAttributeNames: {
-        //         '#userId': 'userId',
-        //         '#taskId': 'todoId',
-        //     },
-        //     ExpressionAttributeValues: {
-        //         ':id': userId,
-        //         ':todoId': deleteTodoId,
-        //     },
-        // };
-
         const getTasks = await DBOperations.query(
             DBparams.readTasksForDelete(userId, deleteTodoId),
         );
-        if (
-            getTasks.Items.length === 0 
-        ) {
+        if (getTasks.Items.length === 0) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to delete the todo !',
             };
         } else {
-            // const deleteTaskParams = {
-            //     TableName: 'Tasks',
-            //     Key: {
-            //         userId: userId,
-            //         todoId: deleteTodoId,
-            //     },
-            //     ConditionExpression: 'todoId = :taskId',
-            //     ExpressionAttributeValues: {
-            //         ':taskId': deleteTodoId,
-            //     },
-            // };
             await DBOperations.del(DBparams.deleteTask(userId, deleteTodoId));
             return {
                 message: 'Task deleted successfully',
