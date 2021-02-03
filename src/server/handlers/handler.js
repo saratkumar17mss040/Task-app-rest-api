@@ -107,7 +107,6 @@ async function createTodoRouteHandler(request, response) {
         return error.details;
     } else {
         const getTasks = await DBOperations.query(DBparams.readTasks(userId));
-        console.log(getTasks.Items.length);
         if (getTasks.Items.length === 0) {
             return {
                 message:
@@ -169,7 +168,10 @@ async function deleteTodoRouteHandler(request, response) {
         const getTasks = await DBOperations.query(
             DBparams.readTasksForDelete(userId, deleteTodoId),
         );
-        if (getTasks.Items.length === 0) {
+        if (
+            getTasks.Items.length === undefined ||
+            getTasks.Items.length === 0
+        ) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to delete the todo !',
