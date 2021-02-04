@@ -1,7 +1,7 @@
 'use strict';
 
-const Handler = require('../handlers/handler');
-const Schema = require('../Schema/schema');
+const Handler = require('../../handlers/handler');
+const Schema = require('../../schema/schema');
 
 // All server routes
 const defaultRoute = {
@@ -12,7 +12,7 @@ const defaultRoute = {
         auth: false,
         description: 'Get - server active route',
         notes: ['Returns the default todo route response'],
-        tags: ['api'],
+        tags: ['api', 'active'],
         cors: true,
     },
 };
@@ -25,7 +25,7 @@ const getTodoRoute = {
         auth: 'jwt',
         description: 'Get - todo by userId',
         notes: ["Returns all the todo's for the given userId"],
-        tags: ['api'],
+        tags: ['api', 'todoGet'],
         cors: true,
         validate: {
             params: Schema.getTasksSchema,
@@ -44,10 +44,13 @@ const signupRoute = {
         auth: false,
         description: 'Post - signup by emailId and password',
         notes: ['Returns whether the signup is successful or not with userId '],
-        tags: ['api'],
+        tags: ['api', 'signup'],
         cors: true,
         validate: {
             payload: Schema.signupSchema,
+        },
+        response: {
+            schema: Schema.signupResponseSchema,
         },
     },
 };
@@ -60,10 +63,13 @@ const loginRoute = {
         auth: false,
         description: 'Post - login by emailId and password',
         notes: ['Returns whether the login is successful or not'],
-        tags: ['api'],
+        tags: ['api', 'login'],
         cors: true,
         validate: {
             payload: Schema.loginSchema,
+        },
+        response: {
+            schema: Schema.loginResponseSchema,
         },
     },
 };
@@ -76,10 +82,13 @@ const createTodoRoute = {
         auth: 'jwt',
         description: 'Post - submit todo by userId, todo, todoStatus',
         notes: ["Returns all the todo's with the submitted todo"],
-        tags: ['api'],
+        tags: ['api', 'todoCreate'],
         cors: true,
         validate: {
             payload: Schema.createTaskSchema,
+        },
+        response: {
+            schema: Schema.createTaskResponseSchema,
         },
     },
 };
@@ -92,10 +101,13 @@ const updateTodoRoute = {
         auth: 'jwt',
         description: 'Put - update todo by userId, todoId, todo, todoStatus',
         notes: ["Returns all the todo's with the updated todo"],
-        tags: ['api'],
+        tags: ['api', 'todoUpdate'],
         cors: true,
         validate: {
             payload: Schema.updateTaskSchema,
+        },
+        response: {
+            schema: Schema.updateTaskResponseSchema,
         },
     },
 };
@@ -108,10 +120,13 @@ const deleteTodoRoute = {
         auth: 'jwt',
         description: 'Delete - remove todo by userId, todoId',
         notes: ['Returns whether the given todoId is deleted or not'],
-        tags: ['api'],
+        tags: ['api', 'todoDelete'],
         cors: true,
         validate: {
             payload: Schema.deleteTaskSchema,
+        },
+        response: {
+            schema: Schema.deleteTaskResponseSchema,
         },
     },
 };

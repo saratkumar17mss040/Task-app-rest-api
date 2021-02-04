@@ -96,15 +96,40 @@ const deleteTaskSchema = Joi.object({
 }).label('deleteTaskModel');
 
 // All server response schema model
-const getTasksResponseSchema = Joi.array().items(
-    Joi.object({
-        todo: Joi.string(),
-        createdAt: Joi.number(),
-        todoId: Joi.string(),
-        userId: Joi.string(),
-        todoStatus: Joi.string(),
-    }).label('todo'),
-).label('list');
+const getTasksResponseSchema = Joi.array()
+    .items(
+        Joi.object({
+            todo: Joi.string(),
+            createdAt: Joi.number(),
+            todoId: Joi.string(),
+            userId: Joi.string(),
+            todoStatus: Joi.string(),
+        }).label('todo'),
+    )
+    .label('getTasksResponseModel');
+
+const createTaskResponseSchema = Joi.object({
+    message: Joi.string(),
+    todoId: Joi.string(),
+}).label('createTaskResponseModel');
+
+const updateTaskResponseSchema = Joi.object({
+    message: Joi.string(),
+}).label('updateTaskResponseModel');
+
+const deleteTaskResponseSchema = Joi.object({
+    message: Joi.string(),
+}).label('deleteTaskResponseModel');
+
+const signupResponseSchema = Joi.object({
+    message: Joi.string(),
+    userId: Joi.string(),
+}).label('signupResponseModel');
+
+const loginResponseSchema = Joi.object({
+    message: Joi.string(),
+    token: Joi.string(),
+}).label('loginResponseModel');
 
 module.exports = {
     signupSchema,
@@ -113,5 +138,10 @@ module.exports = {
     createTaskSchema,
     updateTaskSchema,
     deleteTaskSchema,
+    signupResponseSchema,
+    loginResponseSchema,
     getTasksResponseSchema,
+    createTaskResponseSchema,
+    updateTaskResponseSchema,
+    deleteTaskResponseSchema,
 };

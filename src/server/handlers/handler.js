@@ -1,11 +1,11 @@
 'use strict';
 
 const Jwt = require('jsonwebtoken');
-const DBOperations = require('../dbOperations');
+const DBOperations = require('../lib/db/dbOperations');
 const Schema = require('../Schema/schema');
-const DBparams = require('../params/dbParams');
+const DBparams = require('../lib/db/dbParams');
 require('dotenv').config();
-require('../dbOperations');
+require('../lib/db/dbOperations');
 
 // All server handler functions
 function defaultRouteHandler(request, reply) {
@@ -76,10 +76,17 @@ async function getTodoRouteHandler(request, response) {
         return error.details;
     } else {
         const getTasks = await DBOperations.query(DBparams.readTasks(userId));
-        if (getTasks.Items.length === 0) {
+        console.log(getTasks);
+        console.log(getTasks.Items);
+        console.log(getTasks.Items.length);
+        if (getTasks.Items === undefined) {
             return {
                 message:
                     "Entered userId does not exist in the database. Please enter registered userId to read todo's !",
+            };
+        } else if (getTasks.Items.length === 0) {
+            return {
+                message: "User dont't have any todo's yet",
             };
         }
         return getTasks.Items;
@@ -96,7 +103,10 @@ async function createTodoRouteHandler(request, response) {
         return error.details;
     } else {
         const getTasks = await DBOperations.query(DBparams.readTasks(userId));
-        if (getTasks.Items.length === 0) {
+        console.log(getTasks);
+        console.log(getTasks.Items);
+        console.log(getTasks.Items.length);
+        if (getTasks.Items === undefined) {
             return {
                 message:
                     'Entered userId does not exist in the database. Please enter registered userId to add todo !',
@@ -126,7 +136,10 @@ async function updateTodoRouteHandler(request, response) {
         const getTasks = await DBOperations.query(
             DBparams.readTasksForUpdate(userId, updateTodoId),
         );
-        if (getTasks.Items.length === 0) {
+        console.log(getTasks);
+        console.log(getTasks.Items);
+        console.log(getTasks.Items.length);
+        if (getTasks.Items === undefined) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to update the todo !',
@@ -157,10 +170,10 @@ async function deleteTodoRouteHandler(request, response) {
         const getTasks = await DBOperations.query(
             DBparams.readTasksForDelete(userId, deleteTodoId),
         );
-        if (
-            getTasks.Items.length === undefined ||
-            getTasks.Items.length === 0
-        ) {
+        console.log(getTasks);
+        console.log(getTasks.Items);
+        console.log(getTasks.Items.length);
+        if (getTasks.Items === undefined) {
             return {
                 message:
                     'Entered userId and taskId does not exist in the database. Please enter registered userId and taskId to delete the todo !',

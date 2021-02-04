@@ -30,6 +30,7 @@ function query(params) {
                 return reject(err);
             } else {
                 console.log('Data queried successfully');
+                console.log(data);
                 return resolve(data);
             }
         });

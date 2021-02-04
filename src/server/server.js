@@ -6,7 +6,7 @@ const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const Package = require('../../package');
 const hapiAuthJwt2 = require('hapi-auth-jwt2');
-const Routes = require('./routes/routes');
+const Routes = require('./lib/routes/routes');
 require('dotenv').config();
 
 const validate = async function (decoded, request, h) {
