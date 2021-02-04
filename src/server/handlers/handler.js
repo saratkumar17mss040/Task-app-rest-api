@@ -2,7 +2,7 @@
 
 const Jwt = require('jsonwebtoken');
 const DBOperations = require('../lib/db/dbOperations');
-const Schema = require('../scheme/schema');
+const Schema = require('../schema/schema');
 const DBparams = require('../lib/db/dbParams');
 require('dotenv').config();
 require('../lib/db/dbOperations');
