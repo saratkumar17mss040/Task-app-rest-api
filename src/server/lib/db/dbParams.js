@@ -6,12 +6,12 @@ const Uuid = require('uuid');
 function checkIsUserExist(emailId) {
     const checkIsUserExistParams = {
         TableName: 'Users',
-        KeyConditionExpression: '#emailId = :id',
+        KeyConditionExpression: '#emailId = :eId',
         ExpressionAttributeNames: {
             '#emailId': 'emailId',
         },
         ExpressionAttributeValues: {
-            ':id': emailId,
+            ':eId': emailId,
         },
     };
     return checkIsUserExistParams;

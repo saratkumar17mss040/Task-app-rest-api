@@ -19,7 +19,7 @@ const defaultRoute = {
 
 const getTodoRoute = {
     method: 'GET',
-    path: '/id/{userId}',
+    path: '/todoList',
     handler: Handler.getTodoRouteHandler,
     config: {
         auth: 'jwt',
@@ -28,11 +28,11 @@ const getTodoRoute = {
         tags: ['api', 'todoGet'],
         cors: true,
         validate: {
-            params: Schema.getTasksSchema,
+            query: Schema.getTasksSchema,
         },
-        response: {
-            schema: Schema.getTasksResponseSchema,
-        },
+        // response: {
+        //     schema: Schema.getTasksResponseSchema,
+        // },
     },
 };
 

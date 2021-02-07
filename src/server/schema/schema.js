@@ -36,6 +36,10 @@ const createTaskSchema = Joi.object({
         .min(36)
         .max(36)
         .description('userId of type uuid - v4'),
+    emailId: Joi.string()
+        .email()
+        .required()
+        .description('emailId of the registered user'),
     todo: Joi.string().required().description('todo to create task'),
     todoStatus: Joi.string()
         .required()
@@ -100,7 +104,7 @@ const updateTaskResponseSchema = Joi.object({
 
 const deleteTaskResponseSchema = Joi.object({
     message: Joi.string(),
-}).label('deleteTaskResponseMode');
+}).label('deleteTaskResponseModel');
 
 const signupResponseSchema = Joi.object({
     message: Joi.string(),
