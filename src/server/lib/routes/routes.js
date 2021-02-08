@@ -52,11 +52,6 @@ const signupRoute = {
         response: {
             schema: Schema.signupResponseSchema,
         },
-        plugins: {
-            'hapi-swagger': {
-                order: 1,
-            },
-        },
     },
 };
 
