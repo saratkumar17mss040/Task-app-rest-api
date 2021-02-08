@@ -52,6 +52,11 @@ const signupRoute = {
         response: {
             schema: Schema.signupResponseSchema,
         },
+        plugins: {
+            'hapi-swagger': {
+                order: 1,
+            },
+        },
     },
 };
 
@@ -82,14 +87,14 @@ const createTodoRoute = {
         auth: 'jwt',
         description: 'Post - submit todo by userId, todo, todoStatus',
         notes: ["Returns all the todo's with the submitted todo"],
-        tags: ['api', 'todoCreate'],
+        tags: ['api', 'todo'],
         cors: true,
         validate: {
             payload: Schema.createTaskSchema,
         },
-        response: {
-            schema: Schema.createTaskResponseSchema,
-        },
+        // response: {
+        // schema: Schema.createTaskResponseSchema,
+        // },
     },
 };
 
@@ -101,7 +106,7 @@ const updateTodoRoute = {
         auth: 'jwt',
         description: 'Put - update todo by userId, todoId, todo, todoStatus',
         notes: ["Returns all the todo's with the updated todo"],
-        tags: ['api', 'todoUpdate'],
+        tags: ['api', 'todo'],
         cors: true,
         validate: {
             payload: Schema.updateTaskSchema,
@@ -120,7 +125,7 @@ const deleteTodoRoute = {
         auth: 'jwt',
         description: 'Delete - remove todo by userId, todoId',
         notes: ['Returns whether the given todoId is deleted or not'],
-        tags: ['api', 'todoDelete'],
+        tags: ['api', 'todo'],
         cors: true,
         validate: {
             payload: Schema.deleteTaskSchema,

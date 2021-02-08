@@ -61,7 +61,7 @@ async function getTodoRouteHandler(request, response) {
 async function createTodoRouteHandler(request, response) {
     const { userId, emailId, todo, todoStatus } = request.payload || {};
     const user = await DBOperations.query(DBparams.checkIsUserExist(emailId));
-    if (user.Items.length === 1) {
+    if (user.Items.length === 1 && user.Items.userId === userId) {
         const task = DBparams.createTask(userId, todo, todoStatus);
         await DBOperations.put(task);
         return {
