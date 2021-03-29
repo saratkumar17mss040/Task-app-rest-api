@@ -37,7 +37,7 @@ async function loginRouteHandler(request, response) {
     const user = await DBOperations.query(
         DBparams.checkLogin(emailId, password),
     );
-    if (!user.Items.userId) {
+    if (!user.Items[0].userId) {
         return {
             message:
                 'Entered emailId and password is not correct. Please enter registered emailId and password !',
