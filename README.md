@@ -60,7 +60,7 @@ Alternatively you can also use postman to test API calls.
 
 ## 🔯 Features
 
--   Users will be able to signup / login.
+-   Users will be able to signup / login / logout .
 -   Users can create todo.
 -   Users can get todo's.
 -   Users can update todo.
