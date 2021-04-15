@@ -49,7 +49,7 @@ Before trying to run the project make sure you have installed node, dynamodb-loc
 3.Npm start  
 `npm start`
 
-## 👨‍💻 Interaction and API testing
+## 👨‍💻 Interaction and Running API UI
 
 Once the server started running open the browser with the localhost path as
 http://localhost:3000/documentation
